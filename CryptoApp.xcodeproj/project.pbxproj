@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		54E861192D4CC312001940C7 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 54E861182D4CC312001940C7 /* SnapKit */; };
+		54E861412D4D06CC001940C7 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 54E861402D4D06CC001940C7 /* Alamofire */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		54E860EF2D4CBE80001940C7 /* CryptoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryptoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +41,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54E861192D4CC312001940C7 /* SnapKit in Frameworks */,
+				54E861412D4D06CC001940C7 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +85,8 @@
 			);
 			name = CryptoApp;
 			packageProductDependencies = (
+				54E861182D4CC312001940C7 /* SnapKit */,
+				54E861402D4D06CC001940C7 /* Alamofire */,
 			);
 			productName = CryptoApp;
 			productReference = 54E860EF2D4CBE80001940C7 /* CryptoApp.app */;
@@ -107,6 +116,10 @@
 			);
 			mainGroup = 54E860E62D4CBE80001940C7;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				54E861172D4CC312001940C7 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				54E8613F2D4D06CC001940C7 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 54E860F02D4CBE80001940C7 /* Products */;
 			projectDirPath = "";
@@ -337,6 +350,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		54E861172D4CC312001940C7 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		54E8613F2D4D06CC001940C7 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire?tab=readme-ov-file";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		54E861182D4CC312001940C7 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 54E861172D4CC312001940C7 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		54E861402D4D06CC001940C7 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 54E8613F2D4D06CC001940C7 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 54E860E72D4CBE80001940C7 /* Project object */;
 }
