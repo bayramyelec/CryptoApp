@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class HomeTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     
@@ -14,10 +15,7 @@ class HomeTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         setup()
-        viewModel.reloadData = { [weak self] in
-            self?.reloadData()
-        }
-        viewModel.fetchData()
+       
     }
     
     required init?(coder: NSCoder) {
@@ -32,13 +30,12 @@ class HomeTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.coins.count
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let coin = viewModel.coins[indexPath.row]
-        cell.textLabel?.text = "\(indexPath.row + 1)  \(coin.symbol) \(coin.name)"
+        
         cell.textLabel?.textColor = .white
         cell.backgroundColor = .black
         return cell

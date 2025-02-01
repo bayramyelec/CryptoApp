@@ -7,21 +7,28 @@
 
 import Foundation
 
-struct CoinModel: Codable {
-    let id, name, symbol: String
-    let rank: Int
-    let isNew, isActive: Bool
-    let type: TypeEnum
+// MARK: - Coin Detay Modeli
+struct CoinDetail: Codable {
+    let id: String
+    let name: String
+    let symbol: String
+    let logo: String
 
     enum CodingKeys: String, CodingKey {
-        case id, name, symbol, rank
-        case isNew = "is_new"
-        case isActive = "is_active"
-        case type
+        case id, name, symbol
+        case logo = "logo"
     }
 }
 
-enum TypeEnum: String, Codable {
-    case coin = "coin"
-    case token = "token"
+// MARK: - Coin Fiyat Modeli
+struct CoinPrice: Codable {
+    let quotes: Quotes
+    
+    struct Quotes: Codable {
+        let USD: PriceInfo
+    }
+    
+    struct PriceInfo: Codable {
+        let price: Double
+    }
 }
