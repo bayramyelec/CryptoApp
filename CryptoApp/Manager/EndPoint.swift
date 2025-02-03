@@ -24,28 +24,23 @@ enum httpMethod: String {
 
 enum EndPoint {
     case getCoinList
-    case getCoinDetails(coinId: String)
 }
 
 extension EndPoint: EndPointProtocol {
     var baseUrl: String {
-        return "https://api.coinpaprika.com/v1/"
+        return "https://api.coinlore.net/api/"
     }
     
     var path: String {
         switch self {
         case .getCoinList:
-            return "coins"
-        case .getCoinDetails(let coinId):
-            return "coins/\(coinId)"
+            return "tickers/"
         }
     }
     
     var method: httpMethod {
         switch self {
         case .getCoinList:
-            return .get
-        case .getCoinDetails(_):
             return .get
         }
     }

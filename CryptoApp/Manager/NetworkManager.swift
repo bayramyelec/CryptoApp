@@ -25,21 +25,9 @@ class NetworkManager {
         }
     }
     
-    func fetchCoinData(completion: @escaping (Result<[CoinModel], Error>) -> Void) {
+    func fetchCoinData(completion: @escaping (Result<CoinModel, Error>) -> Void) {
         let endpoint = EndPoint.getCoinList
         fetchData(endPoint: endpoint, completion: completion)
-    }
-    
-    func fetchCoinDetails(coinId: String, completion: @escaping (Result<CoinDetail, Error>) -> Void) {
-        let endpoint = EndPoint.getCoinDetails(coinId: coinId)
-        fetchData(endPoint: endpoint) { (result: Result<CoinDetail, Error>) in
-            switch result {
-            case .success(let success):
-                completion(.success(success))
-            case .failure(let failure):
-                completion(.failure(failure))
-            }
-        }
     }
     
 }

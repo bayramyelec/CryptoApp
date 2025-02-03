@@ -17,7 +17,6 @@ class HomeVC: UIViewController {
         return view
     }()
     
-    
     private let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
@@ -48,10 +47,10 @@ class HomeVC: UIViewController {
         label.textColor = .white
         label.font = .systemFont(ofSize: 18, weight: .bold)
         label.textAlignment = .center
-        label.text = "Prices"
+        label.text = "Prices (24h)"
         return label
     }()
-        
+    
     private var tableView = HomeTableView()
     
     var viewModel = HomeViewModel()
@@ -64,13 +63,11 @@ class HomeVC: UIViewController {
     
     private func setupUI() {
         view.backgroundColor = .black
-        
         view.addSubview(headerView)
         view.addSubview(searchBar)
         view.addSubview(coinsTitleLabel)
         view.addSubview(coinPriceTitleLabel)
         view.addSubview(tableView)
-        
         setupConstraints()
     }
     

@@ -8,42 +8,31 @@
 import Foundation
 
 struct CoinModel: Codable {
-    let id, name, symbol: String
-    let rank: Int
-    let isNew, isActive: Bool
-    let type: TypeEnum
+    let data: [Coin]
+}
 
-    enum CodingKeys: String, CodingKey {
-        case id, name, symbol, rank
-        case isNew = "is_new"
-        case isActive = "is_active"
-        case type
+struct Coin: Codable {
+    let id, symbol, name, nameid: String
+    let rank: Int
+    let priceUsd, percentChange24H, percentChange1H, percentChange7D: String
+    let priceBtc, marketCapUsd: String
+    let volume24, volume24A: Double
+    let csupply, tsupply: String
+    let msupply: String?
+    var logoUrl : String {
+        return "https://www.coinlore.com/img/\(nameid).webp"
     }
-}
 
-enum TypeEnum: String, Codable {
-    case coin = "coin"
-    case token = "token"
-}
-
-struct CoinDetail: Codable {
-    let id: String
-    let name: String
-    let symbol: String
-    let rank: Int
-    let isNew: Bool
-    let isActive: Bool
-    let type: String
-    let logo: String?
-    let description: String?
-    let proofType: String?
-    let hashAlgorithm: String?
-    
     enum CodingKeys: String, CodingKey {
-        case id, name, symbol, rank, type, logo, description
-        case isNew = "is_new"
-        case isActive = "is_active"
-        case proofType = "proof_type"
-        case hashAlgorithm = "hash_algorithm"
+        case id, symbol, name, nameid, rank
+        case priceUsd = "price_usd"
+        case percentChange24H = "percent_change_24h"
+        case percentChange1H = "percent_change_1h"
+        case percentChange7D = "percent_change_7d"
+        case priceBtc = "price_btc"
+        case marketCapUsd = "market_cap_usd"
+        case volume24
+        case volume24A = "volume24a"
+        case csupply, tsupply, msupply
     }
 }
