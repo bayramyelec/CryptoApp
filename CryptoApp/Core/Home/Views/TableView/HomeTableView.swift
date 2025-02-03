@@ -10,6 +10,8 @@ import Kingfisher
 
 final class HomeTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     
+    weak var coinDelegate: didSelectCoinDelegate?
+        
     var viewModel = HomeViewModel()
     
     private let activityIndicator: UIActivityIndicatorView = {
@@ -71,7 +73,7 @@ final class HomeTableView: UITableView, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        coinDelegate?.didSelectCoin(coin: viewModel.coins[indexPath.row])
     }
     
 }

@@ -5,6 +5,10 @@
 //  Created by Bayram Yeleç on 31.01.2025.
 //
 
+protocol didSelectCoinDelegate: AnyObject {
+    func didSelectCoin(coin: Coin)
+}
+
 import UIKit
 import SnapKit
 
@@ -19,7 +23,7 @@ class HomeVC: UIViewController {
         label.textColor = .white
         label.font = .systemFont(ofSize: 24, weight: .bold)
         label.textAlignment = .center
-        label.text = "Top Crypto"
+        label.text = "Highest Increases"
         return label
     }()
     
@@ -63,6 +67,7 @@ class HomeVC: UIViewController {
     
     private func setupUI() {
         view.backgroundColor = .black
+        tableView.coinDelegate = self
         
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -89,7 +94,7 @@ class HomeVC: UIViewController {
         }
         
         headerTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(contentView).offset(10)
+            make.top.equalTo(contentView).offset(20)
             make.left.equalToSuperview().inset(20)
         }
         
@@ -125,5 +130,13 @@ class HomeVC: UIViewController {
         CustomNavigationBar(backgroundColor: .black, tintColor: .white, title: "Live Prices")
         navigationItem.rightBarButtonItem = circleButton(imageName: "chevron.right", cornerRadius: 20)
         navigationItem.leftBarButtonItem = circleButton(imageName: "info", cornerRadius: 20)
+    }
+}
+
+extension HomeVC: didSelectCoinDelegate {
+    func didSelectCoin(coin: Coin) {
+        let vc = DetailVC()
+        vc.coin = coin
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
