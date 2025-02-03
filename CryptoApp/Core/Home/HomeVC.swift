@@ -10,6 +10,9 @@ import SnapKit
 
 class HomeVC: UIViewController {
     
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
+    
     private let headerTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -48,7 +51,6 @@ class HomeVC: UIViewController {
     }()
     
     private var tableView = HomeTableView()
-    
     private var collectionView = HomeCollectionView()
     
     var viewModel = HomeViewModel()
@@ -61,39 +63,61 @@ class HomeVC: UIViewController {
     
     private func setupUI() {
         view.backgroundColor = .black
-        view.addSubview(headerView)
-        view.addSubview(headerTitleLabel)
+        
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        
+        contentView.addSubview(headerTitleLabel)
+        contentView.addSubview(headerView)
         headerView.addSubview(collectionView)
-        view.addSubview(coinsTitleLabel)
-        view.addSubview(coinPriceTitleLabel)
-        view.addSubview(tableView)
+        contentView.addSubview(coinsTitleLabel)
+        contentView.addSubview(coinPriceTitleLabel)
+        contentView.addSubview(tableView)
+        
         setupConstraints()
     }
     
     private func setupConstraints() {
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        contentView.snp.makeConstraints { make in
+            make.edges.equalTo(scrollView)
+            make.width.equalTo(scrollView)
+            make.height.greaterThanOrEqualTo(view.snp.height)
+        }
+        
         headerTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).inset(10)
+            make.top.equalTo(contentView).offset(10)
             make.left.equalToSuperview().inset(20)
         }
+        
         headerView.snp.makeConstraints { make in
             make.top.equalTo(headerTitleLabel.snp.bottom).offset(10)
             make.left.right.equalToSuperview()
             make.height.equalTo(200)
         }
+        
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
         coinsTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(collectionView.snp.bottom).offset(10)
             make.left.equalToSuperview().inset(10)
         }
+        
         coinPriceTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(collectionView.snp.bottom).offset(10)
             make.right.equalToSuperview().inset(10)
         }
+        
         tableView.snp.makeConstraints { make in
             make.top.equalTo(coinsTitleLabel.snp.bottom).offset(10)
-            make.left.right.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.left.right.equalTo(contentView)
+            make.bottom.equalTo(contentView)
+            make.height.equalTo(70 * 100)
         }
     }
     
@@ -102,5 +126,4 @@ class HomeVC: UIViewController {
         navigationItem.rightBarButtonItem = circleButton(imageName: "chevron.right", cornerRadius: 20)
         navigationItem.leftBarButtonItem = circleButton(imageName: "info", cornerRadius: 20)
     }
-    
 }

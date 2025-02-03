@@ -31,6 +31,7 @@ final class HomeTableView: UITableView, UITableViewDelegate, UITableViewDataSour
                 self?.activityIndicator.stopAnimating()
             }
         }
+        isScrollEnabled = false
     }
     
     required init?(coder: NSCoder) {
@@ -47,7 +48,8 @@ final class HomeTableView: UITableView, UITableViewDelegate, UITableViewDataSour
     private func activityIndicatorSetup(){
         addSubview(activityIndicator)
         activityIndicator.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+            make.top.equalToSuperview().inset(screenWidth / 2)
+            make.centerX.equalToSuperview()
             make.height.width.equalTo(100)
         }
         activityIndicator.startAnimating()
