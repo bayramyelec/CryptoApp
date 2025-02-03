@@ -10,25 +10,21 @@ import SnapKit
 
 class HomeVC: UIViewController {
     
+    private let headerTitleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.textAlignment = .center
+        label.text = "Top Crypto"
+        return label
+    }()
+    
     private let headerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .clear
         return view
-    }()
-    
-    private let searchBar: UISearchBar = {
-        let searchBar = UISearchBar()
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.backgroundColor = .black
-        searchBar.searchTextField.textColor = .white
-        searchBar.searchTextField.leftView?.tintColor = .lightGray
-        searchBar.searchBarStyle = .minimal
-        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(
-            string: "Search...",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
-        )
-        return searchBar
     }()
     
     private let coinsTitleLabel: UILabel = {
@@ -53,6 +49,8 @@ class HomeVC: UIViewController {
     
     private var tableView = HomeTableView()
     
+    private var collectionView = HomeCollectionView()
+    
     var viewModel = HomeViewModel()
     
     override func viewDidLoad() {
@@ -64,7 +62,8 @@ class HomeVC: UIViewController {
     private func setupUI() {
         view.backgroundColor = .black
         view.addSubview(headerView)
-        view.addSubview(searchBar)
+        view.addSubview(headerTitleLabel)
+        headerView.addSubview(collectionView)
         view.addSubview(coinsTitleLabel)
         view.addSubview(coinPriceTitleLabel)
         view.addSubview(tableView)
@@ -72,21 +71,24 @@ class HomeVC: UIViewController {
     }
     
     private func setupConstraints() {
-        headerView.snp.makeConstraints { make in
-            make.top.left.right.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(100)
+        headerTitleLabel.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).inset(10)
+            make.left.equalToSuperview().inset(20)
         }
-        searchBar.snp.makeConstraints { make in
-            make.top.equalTo(headerView.snp.bottom).offset(10)
-            make.left.right.equalToSuperview().inset(20)
-            make.height.equalTo(50)
+        headerView.snp.makeConstraints { make in
+            make.top.equalTo(headerTitleLabel.snp.bottom).offset(10)
+            make.left.right.equalToSuperview()
+            make.height.equalTo(200)
+        }
+        collectionView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
         coinsTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom).offset(10)
+            make.top.equalTo(collectionView.snp.bottom).offset(10)
             make.left.equalToSuperview().inset(10)
         }
         coinPriceTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom).offset(10)
+            make.top.equalTo(collectionView.snp.bottom).offset(10)
             make.right.equalToSuperview().inset(10)
         }
         tableView.snp.makeConstraints { make in

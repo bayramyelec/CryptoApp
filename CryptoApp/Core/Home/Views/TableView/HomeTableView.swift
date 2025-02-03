@@ -26,8 +26,10 @@ final class HomeTableView: UITableView, UITableViewDelegate, UITableViewDataSour
         activityIndicatorSetup()
         viewModel.fetchCoins()
         viewModel.reloadData = { [weak self] in
-            self?.reloadData()
-            self?.activityIndicator.stopAnimating()
+            DispatchQueue.main.async {
+                self?.reloadData()
+                self?.activityIndicator.stopAnimating()
+            }
         }
     }
     

@@ -114,8 +114,8 @@ class HomeTableViewCell: UITableViewCell {
         customImageView.kf.setImage(with: url)
         nameLabel.text = model.name
         symbolLabel.text = model.symbol
-        priceLabel.text = model.priceUsd
-        percentChangelabel.text = model.percentChange24H
+        priceLabel.text = "$\(model.priceUsd)"
+        percentChangelabel.text = "\(model.percentChange24H)%"
         
         if percentChangelabel.text?.first == "-"{
             percentChangelabel.textColor = .red

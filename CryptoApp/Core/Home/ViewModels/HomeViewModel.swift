@@ -17,7 +17,14 @@ class HomeViewModel {
         }
     }
     
+    var topCoins: [Coin] = [] {
+        didSet {
+            reloadTopCoins?()
+        }
+    }
+    
     var reloadData: (() -> Void)?
+    var reloadTopCoins: (() -> Void)?
     
     func fetchCoins() {
         NetworkManager.shared.fetchCoinData { result in
@@ -25,6 +32,19 @@ class HomeViewModel {
             case .success(let success):
                 self.coins = success.data
                 self.reloadData?()
+            case .failure(let failure):
+                print(failure)
+            }
+        }
+    }
+    
+    func fetchTopCoins() {
+        NetworkManager.shared.fetchCoinData { result in
+            switch result {
+            case .success(let success):
+                let list = success.data.filter { Double($0.percentChange24H) ?? 0 > 0 }
+                self.topCoins = list.sorted { (Double($0.percentChange24H) ?? 0) > (Double($1.percentChange24H) ?? 0) }
+                self.reloadTopCoins?()
             case .failure(let failure):
                 print(failure)
             }
