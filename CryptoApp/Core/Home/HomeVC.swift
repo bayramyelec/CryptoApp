@@ -6,7 +6,7 @@
 //
 
 protocol didSelectCoinDelegate: AnyObject {
-    func didSelectCoin(coin: Coin)
+    func didSelectCoin(coin: Coin, viewmodel: HomeViewModel)
 }
 
 import UIKit
@@ -134,9 +134,10 @@ class HomeVC: UIViewController {
 }
 
 extension HomeVC: didSelectCoinDelegate {
-    func didSelectCoin(coin: Coin) {
+    func didSelectCoin(coin: Coin, viewmodel: HomeViewModel) {
         let vc = DetailVC()
         vc.coin = coin
+        vc.viewModel = viewmodel
         navigationController?.pushViewController(vc, animated: true)
     }
 }

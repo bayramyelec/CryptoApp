@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		54524DF92D4E5088008FE890 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 54524DF82D4E5088008FE890 /* Kingfisher */; };
+		545325952D51327B00523D0E /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 545325942D51327B00523D0E /* DGCharts */; };
 		54E861192D4CC312001940C7 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 54E861182D4CC312001940C7 /* SnapKit */; };
 		54E861412D4D06CC001940C7 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 54E861402D4D06CC001940C7 /* Alamofire */; };
 /* End PBXBuildFile section */
@@ -42,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				545325952D51327B00523D0E /* DGCharts in Frameworks */,
 				54524DF92D4E5088008FE890 /* Kingfisher in Frameworks */,
 				54E861192D4CC312001940C7 /* SnapKit in Frameworks */,
 				54E861412D4D06CC001940C7 /* Alamofire in Frameworks */,
@@ -90,6 +92,7 @@
 				54E861182D4CC312001940C7 /* SnapKit */,
 				54E861402D4D06CC001940C7 /* Alamofire */,
 				54524DF82D4E5088008FE890 /* Kingfisher */,
+				545325942D51327B00523D0E /* DGCharts */,
 			);
 			productName = CryptoApp;
 			productReference = 54E860EF2D4CBE80001940C7 /* CryptoApp.app */;
@@ -123,6 +126,7 @@
 				54E861172D4CC312001940C7 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				54E8613F2D4D06CC001940C7 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				54524DF72D4E5088008FE890 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				545325932D51327B00523D0E /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 54E860F02D4CBE80001940C7 /* Products */;
@@ -364,6 +368,14 @@
 				minimumVersion = 8.1.4;
 			};
 		};
+		545325932D51327B00523D0E /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
+			};
+		};
 		54E861172D4CC312001940C7 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -387,6 +399,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 54524DF72D4E5088008FE890 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		545325942D51327B00523D0E /* DGCharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 545325932D51327B00523D0E /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGCharts;
 		};
 		54E861182D4CC312001940C7 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

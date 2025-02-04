@@ -73,7 +73,7 @@ final class HomeTableView: UITableView, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        coinDelegate?.didSelectCoin(coin: viewModel.coins[indexPath.row])
+        coinDelegate?.didSelectCoin(coin: viewModel.coins[indexPath.row], viewmodel: viewModel)
     }
     
 }

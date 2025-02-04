@@ -8,8 +8,16 @@
 import UIKit
 import SnapKit
 import Kingfisher
+import Charts
+import DGCharts
 
-class DetailVC: UIViewController {
+class DetailVC: UIViewController, ChartViewDelegate {
+    
+    private var lineChart: LineChartView = {
+        let chart = LineChartView()
+        chart.translatesAutoresizingMaskIntoConstraints = false
+        return chart
+    }()
     
     private let headerView: UIView = {
         let view = UIView()
@@ -53,6 +61,7 @@ class DetailVC: UIViewController {
     }()
     
     var coin: Coin?
+    var viewModel = HomeViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,9 +123,12 @@ class DetailVC: UIViewController {
         }
         
     }
-    
+   
     private func setupNavigationBar() {
         CustomNavigationBar(backgroundColor: .black, tintColor: .white, title: coin?.name ?? "Details")
     }
     
+    
+
+
 }
