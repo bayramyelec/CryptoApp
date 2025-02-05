@@ -13,12 +13,6 @@ import DGCharts
 
 class DetailVC: UIViewController, ChartViewDelegate {
     
-    private var lineChart: LineChartView = {
-        let chart = LineChartView()
-        chart.translatesAutoresizingMaskIntoConstraints = false
-        return chart
-    }()
-    
     private let headerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -63,6 +57,8 @@ class DetailVC: UIViewController, ChartViewDelegate {
     var coin: Coin?
     var viewModel = HomeViewModel()
     
+    private var lineChartView: LineChartView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -72,14 +68,12 @@ class DetailVC: UIViewController, ChartViewDelegate {
     
     private func setupUI(){
         view.backgroundColor = .black
-        
         view.addSubview(headerView)
         headerView.layer.cornerRadius = 10
         headerView.addSubview(imageView)
         headerView.addSubview(nameLabel)
         headerView.addSubview(priceLabel)
         headerView.addSubview(percentChangeLabel)
-        
         setupConstraints()
     }
     
@@ -123,12 +117,9 @@ class DetailVC: UIViewController, ChartViewDelegate {
         }
         
     }
-   
+    
     private func setupNavigationBar() {
         CustomNavigationBar(backgroundColor: .black, tintColor: .white, title: coin?.name ?? "Details")
     }
     
-    
-
-
 }

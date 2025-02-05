@@ -22,7 +22,7 @@ struct Coin: Codable {
     var logoUrl : String {
         return "https://www.coinlore.com/img/\(nameid).webp"
     }
-
+    
     enum CodingKeys: String, CodingKey {
         case id, symbol, name, nameid, rank
         case priceUsd = "price_usd"
@@ -35,4 +35,10 @@ struct Coin: Codable {
         case volume24A = "volume24a"
         case csupply, tsupply, msupply
     }
+}
+
+struct MarketData: Codable {
+    let prices: [[Double]]
+    let marketCaps: [[Double]]
+    let totalVolumes: [[Double]]
 }
