@@ -8,7 +8,7 @@
 import UIKit
 
 class PortfolioVC: UIViewController {
-    
+        
     var coins: [Coin] = []
     
     let tableView: UITableView = {
@@ -16,9 +16,7 @@ class PortfolioVC: UIViewController {
         tableView.backgroundColor = .clear
         return tableView
     }()
-    
-    var viewModel = PortfolioViewModel()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -56,6 +54,12 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = DetailVC()
+        vc.coin = coins[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

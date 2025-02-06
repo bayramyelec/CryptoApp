@@ -91,7 +91,7 @@ class HomeVC: UIViewController {
         contentView.snp.makeConstraints { make in
             make.edges.equalTo(scrollView)
             make.width.equalTo(scrollView)
-            make.height.greaterThanOrEqualTo(view.snp.height)
+            make.height.greaterThanOrEqualTo(screenHeight)
         }
         
         headerTitleLabel.snp.makeConstraints { make in

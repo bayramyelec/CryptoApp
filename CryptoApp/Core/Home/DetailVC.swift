@@ -199,7 +199,7 @@ class DetailVC: UIViewController, ChartViewDelegate {
         contentView.snp.makeConstraints { make in
             make.edges.equalTo(scrollView)
             make.width.equalTo(scrollView)
-            make.height.greaterThanOrEqualTo(view.snp.height)
+            make.bottom.equalTo(rankLabel.snp.bottom).offset(10)
         }
         headerView.snp.makeConstraints { make in
             make.top.equalTo(contentView).inset(10)

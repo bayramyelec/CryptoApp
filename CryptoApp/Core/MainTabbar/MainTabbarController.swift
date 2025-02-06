@@ -212,7 +212,7 @@ class MainTabbarController: UITabBarController, UISearchBarDelegate {
                 self.backView.snp.remakeConstraints { make in
                     make.left.right.equalToSuperview()
                     make.bottom.equalToSuperview()
-                    make.height.equalTo(400)
+                    make.height.equalTo(320)
                 }
                 self.view.layoutIfNeeded()
             }
