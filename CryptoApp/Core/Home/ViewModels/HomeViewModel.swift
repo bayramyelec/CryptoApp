@@ -8,12 +8,17 @@
 import Foundation
 import Alamofire
 
-
 class HomeViewModel {
     
     var coins: [Coin] = [] {
         didSet {
             reloadData?()
+        }
+    }
+    
+    var filteredCoins: [Coin] = [] {
+        didSet {
+            reloadFilteredData?()
         }
     }
     
@@ -24,6 +29,7 @@ class HomeViewModel {
     }
     
     var reloadData: (() -> Void)?
+    var reloadFilteredData: (() -> Void)?
     var reloadTopCoins: (() -> Void)?
     
     func fetchCoins() {
@@ -31,6 +37,7 @@ class HomeViewModel {
             switch result {
             case .success(let success):
                 self.coins = success.data
+                self.filteredCoins = success.data
                 self.reloadData?()
             case .failure(let failure):
                 print(failure)
@@ -51,5 +58,12 @@ class HomeViewModel {
         }
     }
     
+    func filterCoins(searchText: String) {
+        filteredCoins = coins.filter { coin in
+            let nameMatch = coin.name.lowercased().contains(searchText.lowercased())
+            let symbolMatch = coin.symbol.lowercased().contains(searchText.lowercased())
+            return nameMatch || symbolMatch
+        }
+    }
+    
 }
-

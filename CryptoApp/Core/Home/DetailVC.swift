@@ -225,7 +225,7 @@ class DetailVC: UIViewController, ChartViewDelegate {
             make.bottom.equalToSuperview().inset(20)
         }
         lineChartView.snp.makeConstraints { make in
-            make.top.equalTo(headerView.snp.bottom).offset(10)
+            make.top.equalTo(headerView.snp.bottom).offset(20)
             make.left.right.equalToSuperview().inset(10)
             make.height.equalTo(300)
         }
@@ -355,7 +355,7 @@ class DetailVC: UIViewController, ChartViewDelegate {
         let thousand = num / 1_000
         let million = num / 1_000_000
         let billion = num / 1_000_000_000
-
+        
         if billion >= 1.0 {
             return String(format: "%.1fB", billion) // Milyar için: "7.9B"
         } else if million >= 1.0 {
@@ -366,6 +366,6 @@ class DetailVC: UIViewController, ChartViewDelegate {
             return String(format: "%.0f", num) // Küçük sayılar için tam sayı göster
         }
     }
-
+    
     
 }

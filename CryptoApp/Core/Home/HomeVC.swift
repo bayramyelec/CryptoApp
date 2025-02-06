@@ -21,7 +21,7 @@ class HomeVC: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .white
-        label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.font = .systemFont(ofSize: 28, weight: .bold)
         label.textAlignment = .center
         label.text = "Highest Increases"
         return label
@@ -129,8 +129,6 @@ class HomeVC: UIViewController {
     
     private func setupNavigationBar() {
         CustomNavigationBar(backgroundColor: .black, tintColor: .white, title: "Live Prices")
-        navigationItem.rightBarButtonItem = circleButton(imageName: "chevron.right", cornerRadius: 20)
-        navigationItem.leftBarButtonItem = circleButton(imageName: "info", cornerRadius: 20)
     }
 }
 
