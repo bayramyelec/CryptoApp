@@ -37,8 +37,6 @@ struct Coin: Codable {
     }
 }
 
-struct MarketData: Codable {
+struct CoinData: Decodable {
     let prices: [[Double]]
-    let marketCaps: [[Double]]
-    let totalVolumes: [[Double]]
 }

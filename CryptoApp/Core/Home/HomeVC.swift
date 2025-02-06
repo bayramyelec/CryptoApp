@@ -68,6 +68,7 @@ class HomeVC: UIViewController {
     private func setupUI() {
         view.backgroundColor = .black
         tableView.coinDelegate = self
+        collectionView.coinDelegate = self
         
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)

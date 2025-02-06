@@ -9,6 +9,8 @@ import UIKit
 
 class HomeCollectionView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    weak var coinDelegate: didSelectCoinDelegate?
+    
     var viewModel = HomeViewModel()
     
     private let activityIndicator: UIActivityIndicatorView = {
@@ -68,6 +70,10 @@ class HomeCollectionView: UICollectionView, UICollectionViewDelegate, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: screenWidth / 2.5, height: 180)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        coinDelegate?.didSelectCoin(coin: viewModel.topCoins[indexPath.row], viewmodel: viewModel)
     }
     
 }
