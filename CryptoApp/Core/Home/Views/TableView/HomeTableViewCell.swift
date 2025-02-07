@@ -11,6 +11,8 @@ import Kingfisher
 
 class HomeTableViewCell: UITableViewCell {
     
+    // MARK: Variables
+    
     static let identifier: String = "HomeTableViewCell"
     
     private let orderLabel: UILabel = {
@@ -60,6 +62,8 @@ class HomeTableViewCell: UITableViewCell {
         return label
     }()
     
+    // MARK: Init
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
@@ -68,6 +72,8 @@ class HomeTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: Funcs
     
     private func setupUI() {
         contentView.backgroundColor = .black

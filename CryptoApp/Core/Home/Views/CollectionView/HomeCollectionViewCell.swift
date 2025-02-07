@@ -9,6 +9,8 @@ import UIKit
 
 class HomeCollectionViewCell: UICollectionViewCell {
     
+    // MARK: Variables
+    
     static let identifier: String = "HomeCollectionViewCell"
     
     private let customImageView: UIImageView = {
@@ -43,6 +45,8 @@ class HomeCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    // MARK: Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -51,6 +55,8 @@ class HomeCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: Funcs
     
     private func setup(){
         backgroundColor = .white.withAlphaComponent(0.2)

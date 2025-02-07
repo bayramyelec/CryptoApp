@@ -9,6 +9,8 @@ import UIKit
 
 class PortfolioTableViewCell: UITableViewCell {
     
+    // MARK: Variables
+    
     static let identifier = "PortfolioTableViewCell"
     
     private let orderLabel: UILabel = {
@@ -26,7 +28,7 @@ class PortfolioTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    private let nameLabel: UILabel = {
+    private let symbolLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16)
         label.textColor = .white
@@ -34,7 +36,15 @@ class PortfolioTableViewCell: UITableViewCell {
         return label
     }()
     
-    private let symbolLabel: UILabel = {
+    private let myValueLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 16)
+        label.textColor = .white
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private let myAmountLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16)
         label.textColor = .white
@@ -58,6 +68,8 @@ class PortfolioTableViewCell: UITableViewCell {
         return label
     }()
     
+    // MARK: Init
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
@@ -67,12 +79,15 @@ class PortfolioTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Funcs
+    
     private func setupUI() {
         contentView.backgroundColor = .black
         contentView.addSubview(orderLabel)
         contentView.addSubview(customImageView)
-        contentView.addSubview(nameLabel)
         contentView.addSubview(symbolLabel)
+        contentView.addSubview(myAmountLabel)
+        contentView.addSubview(myValueLabel)
         contentView.addSubview(priceLabel)
         contentView.addSubview(percentChangelabel)
         setupConstraints()
@@ -87,14 +102,20 @@ class PortfolioTableViewCell: UITableViewCell {
             make.left.equalTo(orderLabel.snp.right).offset(10)
             make.width.equalTo(50)
         }
-        nameLabel.snp.makeConstraints { make in
+        symbolLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(10)
             make.left.equalTo(customImageView.snp.right).offset(10)
-        }
-        symbolLabel.snp.makeConstraints { make in
-            make.top.equalTo(nameLabel.snp.bottom).offset(5)
-            make.left.equalTo(customImageView.snp.right).offset(10)
             make.bottom.equalToSuperview().inset(10)
+        }
+        myValueLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(10)
+            make.centerX.equalToSuperview()
+        }
+        
+        myAmountLabel.snp.makeConstraints { make in
+            make.top.equalTo(myValueLabel.snp.bottom).offset(5)
+            make.bottom.equalToSuperview().inset(10)
+            make.centerX.equalToSuperview()
         }
         priceLabel.snp.makeConstraints { make in
             make.top.right.equalToSuperview().inset(10)
@@ -106,21 +127,25 @@ class PortfolioTableViewCell: UITableViewCell {
         }
     }
     
-    func configure(with model: Coin, index: Int){
+    func configure(with model: Coin, index: Int, amount: CoinAmount? = nil) {
         orderLabel.text = "\(index + 1)"
         let url = URL(string: model.logoUrl)
         customImageView.kf.setImage(with: url)
-        nameLabel.text = model.name
         symbolLabel.text = model.symbol
+        
+        if let amount = amount {
+            myAmountLabel.text = String(format: "%.2f", amount.amount)
+            myValueLabel.text = "$" + String(format: "%.2f", amount.value)
+        }
+        
         priceLabel.text = "$\(model.priceUsd)"
         percentChangelabel.text = "\(model.percentChange24H)%"
         
-        if percentChangelabel.text?.first == "-"{
+        if percentChangelabel.text?.first == "-" {
             percentChangelabel.textColor = .red
-        } else{
+        } else {
             percentChangelabel.textColor = .green
         }
-        
     }
     
 }

@@ -5,6 +5,8 @@
 //  Created by Bayram Yeleç on 31.01.2025.
 //
 
+// MARK: Protocol
+
 protocol didSelectCoinDelegate: AnyObject {
     func didSelectCoin(coin: Coin, viewmodel: HomeViewModel)
 }
@@ -13,6 +15,8 @@ import UIKit
 import SnapKit
 
 class HomeVC: UIViewController {
+    
+    // MARK: Variables
     
     private let scrollView = UIScrollView()
     private let contentView = UIView()
@@ -59,11 +63,15 @@ class HomeVC: UIViewController {
     
     var viewModel = HomeViewModel()
     
+    // MARK: Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupNavigationBar()
     }
+    
+    // MARK: Setup
     
     private func setupUI() {
         view.backgroundColor = .black
@@ -82,6 +90,8 @@ class HomeVC: UIViewController {
         
         setupConstraints()
     }
+    
+    // MARK: Constraints
     
     private func setupConstraints() {
         scrollView.snp.makeConstraints { make in
@@ -131,6 +141,8 @@ class HomeVC: UIViewController {
         CustomNavigationBar(backgroundColor: .black, tintColor: .white, title: "Live Prices")
     }
 }
+
+// MARK: Protocol delegate func
 
 extension HomeVC: didSelectCoinDelegate {
     func didSelectCoin(coin: Coin, viewmodel: HomeViewModel) {

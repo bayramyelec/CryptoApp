@@ -9,6 +9,8 @@ import UIKit
 
 class HomeCollectionView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    // MARK: Variables
+    
     weak var coinDelegate: didSelectCoinDelegate?
     
     var viewModel = HomeViewModel()
@@ -20,6 +22,8 @@ class HomeCollectionView: UICollectionView, UICollectionViewDelegate, UICollecti
         activityIndicator.style = .large
         return activityIndicator
     }()
+    
+    // MARK: Life Cycle
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         let layout = UICollectionViewFlowLayout()
@@ -40,6 +44,8 @@ class HomeCollectionView: UICollectionView, UICollectionViewDelegate, UICollecti
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Funcs
+    
     private func setup(){
         backgroundColor = .black
         delegate = self
@@ -55,6 +61,8 @@ class HomeCollectionView: UICollectionView, UICollectionViewDelegate, UICollecti
         }
         activityIndicator.startAnimating()
     }
+    
+    // MARK: Delegate and DataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.topCoins.count

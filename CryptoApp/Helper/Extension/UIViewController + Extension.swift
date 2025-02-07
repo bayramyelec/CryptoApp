@@ -23,6 +23,7 @@ extension UIViewController {
         navBarAppearance.titleTextAttributes = [.foregroundColor: tintColor]
         navBarAppearance.backgroundColor = backgroundColor
         navBarAppearance.shadowColor = nil
+        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: tintColor]
         
         navigationController?.navigationBar.standardAppearance = navBarAppearance
         navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance

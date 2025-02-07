@@ -13,6 +13,8 @@ import DGCharts
 
 class DetailVC: UIViewController, ChartViewDelegate {
     
+    // MARK: Variables
+    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         return scrollView
@@ -157,6 +159,7 @@ class DetailVC: UIViewController, ChartViewDelegate {
     var coin: Coin?
     var viewModel = HomeViewModel()
     
+    // MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -165,6 +168,8 @@ class DetailVC: UIViewController, ChartViewDelegate {
         configure()
         setupChart()
     }
+    
+    // MARK: SETUP
     
     private func setupUI(){
         view.backgroundColor = .black
@@ -191,6 +196,8 @@ class DetailVC: UIViewController, ChartViewDelegate {
         
         setupConstraints()
     }
+    
+    // MARK: CONSTRAINTS
     
     private func setupConstraints(){
         scrollView.snp.makeConstraints { make in
@@ -267,6 +274,8 @@ class DetailVC: UIViewController, ChartViewDelegate {
         }
     }
     
+    // MARK: Funcs
+    
     private func configure(){
         if let url = URL(string: coin?.logoUrl ?? "") {
             imageView.kf.setImage(with: url)
@@ -303,9 +312,6 @@ class DetailVC: UIViewController, ChartViewDelegate {
     private func setupChart(){
         
         lineChartView.delegate = self
-        
-        
-        
         
         guard let coin = coin else { return }
         
@@ -357,13 +363,13 @@ class DetailVC: UIViewController, ChartViewDelegate {
         let billion = num / 1_000_000_000
         
         if billion >= 1.0 {
-            return String(format: "%.1fB", billion) // Milyar için: "7.9B"
+            return String(format: "%.1fB", billion)
         } else if million >= 1.0 {
-            return String(format: "%.1fM", million) // Milyon için: "7.9M"
+            return String(format: "%.1fM", million)
         } else if thousand >= 1.0 {
-            return String(format: "%.1fK", thousand) // Bin için: "7.9K"
+            return String(format: "%.1fK", thousand)
         } else {
-            return String(format: "%.0f", num) // Küçük sayılar için tam sayı göster
+            return String(format: "%.0f", num)
         }
     }
     

@@ -10,6 +10,8 @@ import Alamofire
 
 class HomeViewModel {
     
+    // MARK: Variables
+    
     var coins: [Coin] = [] {
         didSet {
             reloadData?()
@@ -28,9 +30,13 @@ class HomeViewModel {
         }
     }
     
+    // MARK: Closures
+    
     var reloadData: (() -> Void)?
     var reloadFilteredData: (() -> Void)?
     var reloadTopCoins: (() -> Void)?
+    
+    // MARK: Funcs
     
     func fetchCoins() {
         NetworkManager.shared.fetchCoinData { result in

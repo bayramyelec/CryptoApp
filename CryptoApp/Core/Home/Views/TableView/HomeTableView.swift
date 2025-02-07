@@ -10,6 +10,8 @@ import Kingfisher
 
 final class HomeTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     
+    // MARK: Variables
+    
     weak var coinDelegate: didSelectCoinDelegate?
         
     var viewModel = HomeViewModel()
@@ -21,6 +23,8 @@ final class HomeTableView: UITableView, UITableViewDelegate, UITableViewDataSour
         activityIndicator.style = .large
         return activityIndicator
     }()
+    
+    // MARK: Init
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -40,6 +44,8 @@ final class HomeTableView: UITableView, UITableViewDelegate, UITableViewDataSour
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Funcs
+    
     private func setup(){
         dataSource = self
         delegate = self
@@ -56,6 +62,8 @@ final class HomeTableView: UITableView, UITableViewDelegate, UITableViewDataSour
         }
         activityIndicator.startAnimating()
     }
+    
+    // MARK: Delegate and DataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.coins.count

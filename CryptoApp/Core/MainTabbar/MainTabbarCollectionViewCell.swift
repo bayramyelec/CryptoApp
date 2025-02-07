@@ -10,6 +10,8 @@ import Kingfisher
 
 class MainTabbarCollectionViewCell: UICollectionViewCell {
     
+    // MARK: Variables
+    
     static let identifier = "MainTabbarCollectionViewCell"
     
     private let customImageView: UIImageView = {
@@ -25,6 +27,8 @@ class MainTabbarCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    // MARK: Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -33,6 +37,8 @@ class MainTabbarCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: Funcs
     
     private func setup(){
         contentView.backgroundColor = .clear

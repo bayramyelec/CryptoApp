@@ -37,6 +37,3 @@ struct Coin: Codable {
     }
 }
 
-struct CoinData: Decodable {
-    let prices: [[Double]]
-}

@@ -9,6 +9,8 @@ import UIKit
 
 class MainTabbarController: UITabBarController, UISearchBarDelegate {
     
+    // MARK: Variables
+    
     private let plusButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "plus"), for: .normal)
@@ -77,6 +79,10 @@ class MainTabbarController: UITabBarController, UISearchBarDelegate {
     var viewModel = MainTabbarViewModel()
     var homeViewModel = HomeViewModel()
     
+    
+    // MARK: Life Cycle
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -94,6 +100,8 @@ class MainTabbarController: UITabBarController, UISearchBarDelegate {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+    
+    // MARK: SETUP
     
     private func setup(){
         
@@ -122,6 +130,8 @@ class MainTabbarController: UITabBarController, UISearchBarDelegate {
         }
         
     }
+    
+    // MARK: SETUP BUTTON AND SLIDE VIEW
     
     private func setupButtonAndBackView(){
         view.addSubview(plusButton)
@@ -191,6 +201,8 @@ class MainTabbarController: UITabBarController, UISearchBarDelegate {
         }
     }
     
+    // MARK: FUNCS
+    
     @objc func closeView(){
         isToggle = false
         if isToggle == false {
@@ -256,7 +268,7 @@ class MainTabbarController: UITabBarController, UISearchBarDelegate {
         }
     }
     
-    
+    // MARK: SEARCH BAR DELEGATE
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
@@ -274,6 +286,7 @@ class MainTabbarController: UITabBarController, UISearchBarDelegate {
     
 }
 
+// MARK: COLLECTION VIEW DELEGATE AND DATASOURCE
 
 extension MainTabbarController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -292,6 +305,7 @@ extension MainTabbarController: UICollectionViewDelegate, UICollectionViewDataSo
     }
 }
 
+// MARK: TABLE VIEW DELEGATE AND DATASOURCE
 
 extension MainTabbarController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -315,13 +329,17 @@ extension MainTabbarController: UITableViewDelegate, UITableViewDataSource {
             guard let self = self else { return }
             
             let selectedCoin = homeViewModel.filteredCoins[indexPath.row]
-            viewModel.addCoin(selectedCoin)
             
-            self.searchBar.text = ""
-            self.searchBar.resignFirstResponder()
-            tableView.isHidden = true
-            self.collectionView.isHidden = false
-            self.collectionView.reloadData()
+            showPortfolioAlert(coinName: selectedCoin.name, coinSymbol: selectedCoin.symbol, currentPrice: selectedCoin.priceUsd, image: selectedCoin.logoUrl, changePrice: selectedCoin.percentChange24H) { _ in
+                
+                self.viewModel.addCoin(selectedCoin)
+                self.searchBar.text = ""
+                self.searchBar.resignFirstResponder()
+                tableView.isHidden = true
+                self.collectionView.isHidden = false
+                self.collectionView.reloadData()
+                
+            }
             
             completionHandler(true)
         }
@@ -338,6 +356,7 @@ extension MainTabbarController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
+// MARK: CLOSE KEYBOARD AND NOTIFICATION CENTER
 
 extension MainTabbarController {
     
@@ -369,5 +388,53 @@ extension MainTabbarController {
             self.backView.transform = .identity
         }
     }
+    
+}
+
+// MARK: Show Alert
+
+extension MainTabbarController {
+    
+    private func showPortfolioAlert(coinName: String, coinSymbol: String, currentPrice: String, image: String, changePrice: String, handler: ((UIAlertAction) -> Void)?) {
+        let alert = UIAlertController(title: "Portföy Ekle", message: "\(coinName) İçin Güncel Fiyat: $\(currentPrice)", preferredStyle: .alert)
+        
+        alert.addTextField { txtfield in
+            txtfield.placeholder = "Miktar"
+            txtfield.keyboardType = .numberPad
+            txtfield.font = .systemFont(ofSize: 15, weight: .bold)
+        }
+        
+        alert.addAction(UIAlertAction(title: "Ekle", style: .default, handler: { action in
+            if let amountText = alert.textFields?.first?.text, let amount = Double(amountText), let price = Double(currentPrice) {
+                
+                let value = price * amount
+                
+                self.addCoinToPortfolio(value: value, amount: amount, symbol: coinSymbol, image: image, currentPrice: currentPrice, changePrice: changePrice)
+            }
+            handler?(action)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Kapat", style: .cancel))
+        present(alert, animated: true)
+    }
+    
+    private func addCoinToPortfolio(value: Double, amount: Double, symbol: String, image: String, currentPrice: String, changePrice: String) {
+        if let portfolioNav = self.viewControllers?[2] as? UINavigationController,
+           let portfolioVC = portfolioNav.viewControllers.first as? PortfolioVC {
+            
+            if let index = portfolioVC.coins.firstIndex(where: { $0.symbol == symbol }) {
+                
+                let existingAmount = portfolioVC.coinAmounts[index]?.amount ?? 0
+                portfolioVC.coinAmounts[index] = CoinAmount(amount: existingAmount + amount, value: value)
+                
+            } else {
+                
+                portfolioVC.coinAmounts[portfolioVC.coins.count] = CoinAmount(amount: amount, value: value)
+            }
+            
+            portfolioVC.tableView.reloadData()
+        }
+    }
+    
     
 }
