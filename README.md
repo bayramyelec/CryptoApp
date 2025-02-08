@@ -47,7 +47,7 @@ CryptoApp, UIKit ve MVVM mimarisi kullanılarak programmatic olarak geliştirilm
 
 * Swift
 
-* MVVM: Daha düzenli ve sürdürülebilir bir mimari
+* MVVM
 
 * Alamofire
 
