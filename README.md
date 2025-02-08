@@ -63,5 +63,5 @@ CryptoApp, UIKit ve MVVM mimarisi kullanılarak programmatic olarak geliştirilm
 <a><img src="https://github.com/bayramyelec/CryptoApp/blob/0834107dae385deef907a32f8f95e93409e0a7cc/Screens/4.png" width="400" /></a>
 <a><img src="https://github.com/bayramyelec/CryptoApp/blob/0834107dae385deef907a32f8f95e93409e0a7cc/Screens/5.png" width="400" /></a>
 
-📩 İletişim: [Github Profilim](github.com/bayramyelec)
+📩 İletişim: [Github Profilim](https://github.com/bayramyelec)
 
