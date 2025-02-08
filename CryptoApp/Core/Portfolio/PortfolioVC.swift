@@ -19,7 +19,7 @@ class PortfolioVC: UIViewController {
     // MARK: Variables
     
     var coins: [Coin] = []
-    var coinAmounts: [Int: CoinAmount] = [:]
+    var coinAmounts: [String: CoinAmount] = [:]
     
     private let coinTitleLabel: UILabel = {
         let label = UILabel()
@@ -111,7 +111,7 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: PortfolioTableViewCell.identifier, for: indexPath) as! PortfolioTableViewCell
         let coin = coins[indexPath.row]
-        let amount = coinAmounts[indexPath.row]
+        let amount = coinAmounts[coin.symbol]
         cell.configure(with: coin, index: indexPath.row, amount: amount)
         return cell
     }

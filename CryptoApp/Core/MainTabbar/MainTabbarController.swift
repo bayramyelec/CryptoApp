@@ -352,8 +352,6 @@ extension MainTabbarController: UITableViewDelegate, UITableViewDataSource {
         return config
         
     }
-    
-    
 }
 
 // MARK: CLOSE KEYBOARD AND NOTIFICATION CENTER
@@ -396,15 +394,15 @@ extension MainTabbarController {
 extension MainTabbarController {
     
     private func showPortfolioAlert(coinName: String, coinSymbol: String, currentPrice: String, image: String, changePrice: String, handler: ((UIAlertAction) -> Void)?) {
-        let alert = UIAlertController(title: "Portföy Ekle", message: "\(coinName) İçin Güncel Fiyat: $\(currentPrice)", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Edit Portfolio", message: "Current price of \(coinName.uppercased()): $\(currentPrice)", preferredStyle: .alert)
         
         alert.addTextField { txtfield in
-            txtfield.placeholder = "Miktar"
+            txtfield.placeholder = "Amount"
             txtfield.keyboardType = .numberPad
             txtfield.font = .systemFont(ofSize: 15, weight: .bold)
         }
         
-        alert.addAction(UIAlertAction(title: "Ekle", style: .default, handler: { action in
+        alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { action in
             if let amountText = alert.textFields?.first?.text, let amount = Double(amountText), let price = Double(currentPrice) {
                 
                 let value = price * amount
@@ -414,7 +412,7 @@ extension MainTabbarController {
             handler?(action)
         }))
         
-        alert.addAction(UIAlertAction(title: "Kapat", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Close", style: .cancel))
         present(alert, animated: true)
     }
     
@@ -422,19 +420,14 @@ extension MainTabbarController {
         if let portfolioNav = self.viewControllers?[2] as? UINavigationController,
            let portfolioVC = portfolioNav.viewControllers.first as? PortfolioVC {
             
-            if let index = portfolioVC.coins.firstIndex(where: { $0.symbol == symbol }) {
-                
-                let existingAmount = portfolioVC.coinAmounts[index]?.amount ?? 0
-                portfolioVC.coinAmounts[index] = CoinAmount(amount: existingAmount + amount, value: value)
-                
+            if let existingAmount = portfolioVC.coinAmounts[symbol] {
+                portfolioVC.coinAmounts[symbol] = CoinAmount(amount: existingAmount.amount + amount, value: existingAmount.value + value)
             } else {
-                
-                portfolioVC.coinAmounts[portfolioVC.coins.count] = CoinAmount(amount: amount, value: value)
+                portfolioVC.coinAmounts[symbol] = CoinAmount(amount: amount, value: value)
             }
             
             portfolioVC.tableView.reloadData()
         }
     }
-    
     
 }
